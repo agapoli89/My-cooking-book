@@ -13,6 +13,6 @@ export default function RecipeList({ recipies }) {
                 <Link to={`/recipes/${recipe.id}`}>Cook this</Link>
             </div>
         ))}
-    </div>
+    </div> 
   )
 }
