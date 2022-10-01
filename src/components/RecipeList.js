@@ -13,7 +13,7 @@ export default function RecipeList({ recipies }) {
         {recipies.map(recipe => (
             <div key={recipe.id} className={`card ${mode}`}>
                 <h3>{recipe.title}</h3>
-                <p>{recipe.cookingTime} to make</p>
+                <p>{recipe.time} to make</p>
                 <div>{recipe.method.substring(0,100)}...</div>
                 <Link to={`/recipes/${recipe.id}`}>Cook this</Link>
             </div>
