@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { projectFirestore } from '../../firebase/config'
 
@@ -16,7 +16,7 @@ export default function Create() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+    const doc = { title, ingredients, method, time: cookingTime }
 
     try {
       await projectFirestore.collection('recipes').add(doc)

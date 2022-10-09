@@ -6,6 +6,7 @@ import Search from './pages/search/Search'
 import Recipe from './pages/recipe/Recipe'
 import Navbar from './components/Navbar'
 import ThemeSelector from './components/ThemeSelector'
+import Update from './pages/update/Update'
 import { useTheme } from './hooks/useTheme'
 
 import './App.css'
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/recipes/:id">
             <Recipe />
+          </Route>
+          <Route path="/update/:id">
+            <Update />
           </Route>
         </Switch>
       </BrowserRouter>

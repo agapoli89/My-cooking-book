@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTheme } from '../../hooks/useTheme'
 import { projectFirestore } from '../../firebase/config'
+import { Link } from 'react-router-dom'
 
 import './Recipe.css'
 
@@ -22,7 +23,7 @@ export default function Recipe() {
         setRecipe(doc.data())
       } else {
         setIsPending(false)
-        setError('Could not find that repipe')
+        setError('Could not find that recipe')
       } 
     })
 
@@ -30,11 +31,11 @@ export default function Recipe() {
 
   },[id])
 
-  const handleClick = () => {
+ /*  const handleClick = () => {
     projectFirestore.collection('recipes').doc(id).update({
       title: 'Something just updated'
     })
-  }
+  } */
 
   return (
     <div className={`recipe ${mode}`}>
@@ -43,12 +44,13 @@ export default function Recipe() {
       {recipe && (
         <>
           <h2 className='page-title'>{recipe.title}</h2>
-          <p>Takes {recipe.time} to cook.</p>
+          <p>Takes {recipe.time} minutes to cook.</p>
           <ul>
             {recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
           </ul>
           <p className='method'>{recipe.method}</p>
-          <button onClick={() => handleClick()}>Update me</button>
+          {/* <button onClick={() => handleClick()}>Update me</button> */}
+          <Link to={`/update/${id}`}>Update me</Link>
         </>
       )}
     </div>

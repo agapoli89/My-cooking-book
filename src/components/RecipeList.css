@@ -56,6 +56,8 @@
     right: 10px;
     cursor: pointer;
     filter: invert(60%);
+    height: 30px;
+    width: 30px;
 }
 
 /* dark mode */
