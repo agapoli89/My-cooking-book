@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { projectFirestore } from '../../firebase/config'
 
 import './Update.css'
@@ -16,6 +16,8 @@ export default function Update() {
   const [newIngredient, setNewIngredient] = useState('')
   const [currentIngredients, setCurrentIngredients] = useState([])
   const ingredientInput = useRef(null)
+
+  const history = useHistory()
 
   useEffect(() => {
     setIsPending(true)
@@ -38,16 +40,34 @@ export default function Update() {
   },[id])
 
 
-    const handleAdd = (e) => {
-        e.preventDefault()
-        const ing = newIngredient.trim()
-    
-        if (ing && !currentIngredients.includes(ing)) {
-          setCurrentIngredients(prev => [...prev, ing])
-        }
-        setNewIngredient('')
-        ingredientInput.current.focus()
-      }
+  const handleAdd = (e) => {
+    e.preventDefault()
+    const ing = newIngredient.trim()
+
+    if (ing && !currentIngredients.includes(ing)) {
+      setCurrentIngredients(prev => [...prev, ing])
+    }
+    setNewIngredient('')
+    ingredientInput.current.focus()
+  }
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    console.log(e.target.parentElement.textContent)
+    const toDelete = e.target.parentElement.textContent
+  }
+
+  const handleUpdateClick = (e) => {
+    e.preventDefault()
+    console.log('Update');
+    projectFirestore.collection('recipes').doc(id).update({
+      title: title,
+      method: method,
+      time: cookingTime,
+      ingredients: currentIngredients
+    })
+    history.push('/')
+  }
 
   return (
     <div className='update'>
@@ -79,7 +99,7 @@ export default function Update() {
           </div>
         </label>
         <p>Current ingredients: {currentIngredients.map(ingredient => (
-          <em key={ingredient}>{ingredient} <button className='deleteIng'>(x)</button>, </em>
+          <em key={ingredient}>{ingredient} <button className='deleteIng' title='delete' onClick={handleDelete}>(x)</button>, </em>
         ))}</p>
 
         <label>
@@ -101,7 +121,7 @@ export default function Update() {
             required
           />
         </label>
-        <button className='update--btn'>Update</button>
+        <button className='update--btn' onClick={handleUpdateClick}>Update</button>
       </form>
     </div>
   )
