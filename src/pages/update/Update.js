@@ -53,8 +53,21 @@ export default function Update() {
 
   const handleDelete = (e) => {
     e.preventDefault()
-    console.log(e.target.parentElement.textContent)
-    const toDelete = e.target.parentElement.textContent
+    const ingEl = e.target.parentElement.textContent
+    const ingToDelete = ingEl.slice(0, (ingEl.length - 6))
+
+    if (ingToDelete && currentIngredients.includes(ingToDelete)) {
+      const index = currentIngredients.indexOf(ingToDelete)
+      const test = currentIngredients;
+      
+      if (index > -1) {
+        test.splice(index, 1)
+      }
+      setCurrentIngredients(test)
+      console.log(test)
+      console.log(currentIngredients)
+    }
+    
   }
 
   const handleUpdateClick = (e) => {
