@@ -62,7 +62,6 @@ export default function Update() {
       if (index > -1) {
         currentIngredients.splice(index, 1)
         setCurrentIngredients([...currentIngredients])
-      console.log(currentIngredients)
       }
     }
     
@@ -70,7 +69,6 @@ export default function Update() {
 
   const handleUpdateClick = (e) => {
     e.preventDefault()
-    console.log('Update');
     projectFirestore.collection('recipes').doc(id).update({
       title: title,
       method: method,
