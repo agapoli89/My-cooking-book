@@ -58,14 +58,12 @@ export default function Update() {
 
     if (ingToDelete && currentIngredients.includes(ingToDelete)) {
       const index = currentIngredients.indexOf(ingToDelete)
-      const test = currentIngredients;
       
       if (index > -1) {
-        test.splice(index, 1)
-      }
-      setCurrentIngredients(test)
-      console.log(test)
+        currentIngredients.splice(index, 1)
+        setCurrentIngredients([...currentIngredients])
       console.log(currentIngredients)
+      }
     }
     
   }
